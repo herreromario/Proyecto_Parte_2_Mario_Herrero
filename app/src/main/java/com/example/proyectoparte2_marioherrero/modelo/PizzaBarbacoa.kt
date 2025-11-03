@@ -7,3 +7,4 @@ enum class TipoCarne {
 data class PizzaBarbacoa(
     val carne: TipoCarne
 ) : Pizza(nombre = "Barbacoa", TamañoPizza.PEQUEÑA)
+
