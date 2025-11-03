@@ -1,7 +1,5 @@
 package com.example.proyectoparte2_marioherrero.modelo
 
-import android.media.Image
-
 data class Usuario (
     val id: Int,
     val nombre: String,
