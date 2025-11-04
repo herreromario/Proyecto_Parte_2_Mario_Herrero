@@ -5,6 +5,7 @@ enum class TipoCarne {
 }
 
 data class PizzaBarbacoa(
-    val carne: TipoCarne
-) : Pizza(nombre = "Barbacoa", TamañoPizza.PEQUEÑA)
+    val carne: TipoCarne,
+    override val tamaño: TamañoPizza
+) : Pizza(nombre = "Barbacoa", tamaño)
 
