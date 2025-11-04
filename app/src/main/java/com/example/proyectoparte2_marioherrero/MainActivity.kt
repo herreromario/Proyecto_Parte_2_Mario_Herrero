@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.proyectoparte2_marioherrero.ui.screens.PantallaInicial
 import com.example.proyectoparte2_marioherrero.ui.theme.ProyectoParte2MarioHerreroTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProyectoParte2MarioHerreroTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TypographyPreview(
+                    PantallaInicial(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
