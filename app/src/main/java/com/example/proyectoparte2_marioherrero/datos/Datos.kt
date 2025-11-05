@@ -52,7 +52,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 1,
-        precio = 0.0
+        precio = 9.45
     ),
     Pedido(
         id = 2,
@@ -62,7 +62,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 2,
-        precio = 0.0
+        precio = 25.90
     ),
     Pedido(
         id = 3,
@@ -72,7 +72,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 3,
         bebida = Bebida(tipoBebida.SIN_BEBIDA),
         cantidadBebida = 0,
-        precio = 0.0
+        precio = 14.85
     ),
     Pedido(
         id = 4,
@@ -82,7 +82,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 2,
-        precio = 0.0
+        precio = 15.95
     ),
     Pedido(
         id = 5,
@@ -92,7 +92,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 1,
-        precio = 0.0
+        precio = 11.90
     ),
 
     // Usuario 2
@@ -104,7 +104,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 1,
-        precio = 0.0
+        precio = 9.45
     ),
     Pedido(
         id = 7,
@@ -114,7 +114,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 2,
-        precio = 0.0
+        precio = 25.90
     ),
     Pedido(
         id = 8,
@@ -124,7 +124,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.SIN_BEBIDA),
         cantidadBebida = 0,
-        precio = 0.0
+        precio = 6.95
     ),
     Pedido(
         id = 9,
@@ -134,7 +134,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 3,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 3,
-        precio = 0.0
+        precio = 40.35
     ),
     Pedido(
         id = 10,
@@ -144,7 +144,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 1,
-        precio = 0.0
+        precio = 6.95
     ),
 
     // Usuario 3
@@ -156,7 +156,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 1,
-        precio = 0.0
+        precio = 12.95
     ),
     Pedido(
         id = 12,
@@ -166,7 +166,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 2,
-        precio = 0.0
+        precio = 18.90
     ),
     Pedido(
         id = 13,
@@ -176,7 +176,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 1,
-        precio = 0.0
+        precio = 12.95
     ),
     Pedido(
         id = 14,
@@ -186,7 +186,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 2,
-        precio = 0.0
+        precio = 14.90
     ),
     Pedido(
         id = 15,
@@ -196,7 +196,7 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 3,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 3,
-        precio = 0.0
+        precio = 29.85
     )
 )
 
