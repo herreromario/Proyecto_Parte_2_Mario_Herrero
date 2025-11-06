@@ -19,8 +19,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,20 +26,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Usuario
+import com.example.proyectoparte2_marioherrero.modelo.uistate.PizzaTimeUIState
 import com.example.proyectoparte2_marioherrero.ui.theme.AmarilloQuesoLight
 import com.example.proyectoparte2_marioherrero.ui.theme.RojoTomateLight
-import com.example.proyectoparte2_marioherrero.ui.viewmodel.PizzaTimeViewModel
+import kotlin.Unit
 
 @Composable
 fun PantallaInicial(
     modifier: Modifier = Modifier,
-    pizzaTimeViewModel: PizzaTimeViewModel = viewModel()
+    onBotonListarPedidosPulsado: () -> Unit,
+    pizzaTimeUIState: PizzaTimeUIState
 ) {
-    val pizzaTimeUIState by pizzaTimeViewModel.uiState.collectAsState()
-
     val usuario = pizzaTimeUIState.usuarioActual
 
     Column(
@@ -54,7 +51,10 @@ fun PantallaInicial(
         TarjetaUsuario(usuario = usuario)
 
         Spacer(modifier = Modifier.height(20.dp))
-        PreguntarOpcion(modifier = modifier)
+        PreguntarOpcion(
+            modifier = modifier,
+            onBotonListarPedidosPulsado = onBotonListarPedidosPulsado
+        )
     }
 }
 
@@ -104,7 +104,7 @@ fun TarjetaUsuario(usuario: Usuario, modifier: Modifier = Modifier) {
 @Composable
 fun TarjetaPizzaTime(modifier: Modifier) {
     Card(
-        modifier = modifier,
+        modifier = Modifier,
         colors = CardDefaults.cardColors(
             containerColor = AmarilloQuesoLight
         )
@@ -126,7 +126,10 @@ fun TarjetaPizzaTime(modifier: Modifier) {
 }
 
 @Composable
-fun PreguntarOpcion(modifier: Modifier = Modifier){
+fun PreguntarOpcion(
+    modifier: Modifier = Modifier,
+    onBotonListarPedidosPulsado: () -> Unit
+){
     Column(
         modifier = Modifier
             .padding(top = 50.dp)
@@ -137,14 +140,17 @@ fun PreguntarOpcion(modifier: Modifier = Modifier){
             text = "¿Qué prefieres hacer?",
             style = MaterialTheme.typography.headlineLarge
         )
-        BotonesOpciones()
+        BotonRealizarPedido(onClick = {onBotonListarPedidosPulsado()})
+        BotonListarPedidos(onClick = {onBotonListarPedidosPulsado()})
     }
 }
 
 @Composable
-fun BotonesOpciones(){
+fun BotonRealizarPedido(
+    onClick: () -> Unit,
+) {
     Button(
-        onClick = { /* TODO: Acción del primer botón */ },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = RojoTomateLight),
         shape = RoundedCornerShape(5.dp),
         modifier = Modifier
@@ -153,8 +159,14 @@ fun BotonesOpciones(){
     ) {
         Text(text = "Realizar pedido", style = MaterialTheme.typography.titleMedium)
     }
+}
+
+    @Composable
+    fun BotonListarPedidos(
+        onClick: () -> Unit,
+    ){
     Button(
-        onClick = { /* TODO: Acción del segundo botón */ },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = RojoTomateLight),
         shape = RoundedCornerShape(5.dp),
         modifier = Modifier

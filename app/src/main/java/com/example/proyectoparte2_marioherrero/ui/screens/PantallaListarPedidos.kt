@@ -1,7 +1,6 @@
 package com.example.proyectoparte2_marioherrero.ui.screens
 
 import android.os.Build
-import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -18,34 +17,24 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Pedido
-import com.example.proyectoparte2_marioherrero.modelo.Usuario
-import com.example.proyectoparte2_marioherrero.ui.viewmodel.PizzaTimeViewModel
+import com.example.proyectoparte2_marioherrero.modelo.uistate.PizzaTimeUIState
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PantallaListarPedidos(
     modifier: Modifier = Modifier,
-    pizzaTimeViewModel: PizzaTimeViewModel = viewModel()
+    pizzaTimeUIState: PizzaTimeUIState
 ) {
-    val pizzaTimeUIState by pizzaTimeViewModel.uiState.collectAsState()
 
-    val usuario = pizzaTimeUIState.usuarioActual
     val pedidos = pizzaTimeUIState.listaPedidos
-
-    LaunchedEffect(usuario.id) {
-        pizzaTimeViewModel.cargarPedidosUsuario(usuario.id)
-    }
 
     Column(
         modifier = modifier
@@ -58,7 +47,7 @@ fun PantallaListarPedidos(
             style = MaterialTheme.typography.headlineLarge
         )
         LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(pedidos) { pedido ->
@@ -101,8 +90,12 @@ fun TarjetaPedido(
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             InfoPedido(R.drawable.pizza, "${pedido.cantidadPizza} x Pizza ${pedido.pizza.nombre} (${pedido.pizza.tamaño})")
-            InfoPedido(R.drawable.bebida, "${pedido.cantidadBebida} x ${pedido.bebida.tipoBebida}")
-            InfoPedido(R.drawable.dinero, "${pedido.precio}")
+            if(pedido.cantidadBebida > 0){
+                InfoPedido(R.drawable.bebida, "${pedido.cantidadBebida} x ${pedido.bebida.tipoBebida}")
+            } else {
+                InfoPedido(R.drawable.bebida, stringResource(R.string.sin_bebida))
+            }
+            InfoPedido(R.drawable.dinero, "${pedido.precio} €")
             InfoPedido(R.drawable.calendario, "${pedido.fecha}")
         }
     }
