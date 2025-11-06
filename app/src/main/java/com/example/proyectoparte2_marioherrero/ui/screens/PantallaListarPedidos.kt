@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Pedido
 import com.example.proyectoparte2_marioherrero.modelo.uistate.PizzaTimeUIState
+import com.example.proyectoparte2_marioherrero.ui.theme.AmarilloQuesoLight
+import com.example.proyectoparte2_marioherrero.ui.theme.RojoTomateLight
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -86,6 +90,7 @@ fun TarjetaPedido(
         .fillMaxWidth()
         .padding(horizontal = 4.dp),
         shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(AmarilloQuesoLight),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -97,6 +102,19 @@ fun TarjetaPedido(
             }
             InfoPedido(R.drawable.dinero, "${pedido.precio} €")
             InfoPedido(R.drawable.calendario, "${pedido.fecha}")
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Button(
+                    onClick = {},
+                    colors = ButtonDefaults.buttonColors(RojoTomateLight),
+                ) {
+                    Text(
+                        text = "Detalles"
+                    )
+                }
+            }
         }
     }
 }

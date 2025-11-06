@@ -10,5 +10,5 @@ data class Pedido(
     val cantidadPizza: Int,
     val bebida: Bebida,
     val cantidadBebida: Int,
-    val precio: Double
+    val precio: Double,
 )
