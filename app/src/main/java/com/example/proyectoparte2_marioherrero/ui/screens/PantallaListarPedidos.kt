@@ -34,6 +34,7 @@ import com.example.proyectoparte2_marioherrero.ui.theme.RojoTomateLight
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PantallaListarPedidos(
+    onBotonDetallesPulsado: (Pedido) -> Unit,
     modifier: Modifier = Modifier,
     pizzaTimeUIState: PizzaTimeUIState
 ) {
@@ -55,7 +56,10 @@ fun PantallaListarPedidos(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(pedidos) { pedido ->
-                TarjetaPedido(pedido)
+                TarjetaPedido(
+                    pedido = pedido,
+                    onBotonDetallesPulsado = onBotonDetallesPulsado
+                )
             }
         }
     }
@@ -84,6 +88,7 @@ fun InfoPedido(
 @Composable
 fun TarjetaPedido(
     pedido: Pedido,
+    onBotonDetallesPulsado: (Pedido) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(modifier = modifier
@@ -107,7 +112,7 @@ fun TarjetaPedido(
                 horizontalArrangement = Arrangement.End
             ) {
                 Button(
-                    onClick = {},
+                    onClick = { onBotonDetallesPulsado(pedido) },
                     colors = ButtonDefaults.buttonColors(RojoTomateLight),
                 ) {
                     Text(

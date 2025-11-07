@@ -27,10 +27,11 @@ class PizzaTimeViewModel : ViewModel() {
         _uiState.value = PizzaTimeUIState(
             listaPedidos = listaPedidosActual
         )
-//        _uiState.update { estadoActual ->
-//            estadoActual.copy(
-//                listaPedidos = listaPedidosActual
-//            )
-//        }
+    }
+
+    fun seleccionarPedido(pedido: Pedido){
+        _uiState.value = PizzaTimeUIState(
+            pedidoSeleccionado = pedido
+        )
     }
 }

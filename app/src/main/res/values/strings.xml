@@ -7,4 +7,6 @@
 
     <string name="atras">atrás</string>
     <string name="sin_bebida">SIN BEBIDA</string>
+    <string name="pantalla_detalles_pedido">Pantalla detalles pedido</string>
+    <string name="volver_a_mis_pedidos">Volver a mis pedidos</string>
 </resources>

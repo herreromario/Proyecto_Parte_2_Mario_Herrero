@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Bebida
+import com.example.proyectoparte2_marioherrero.modelo.Pago
 import com.example.proyectoparte2_marioherrero.modelo.Pedido
 import com.example.proyectoparte2_marioherrero.modelo.PizzaBarbacoa
 import com.example.proyectoparte2_marioherrero.modelo.PizzaMargarita
@@ -12,6 +13,7 @@ import com.example.proyectoparte2_marioherrero.modelo.TamañoPizza
 import com.example.proyectoparte2_marioherrero.modelo.TipoCarne
 import com.example.proyectoparte2_marioherrero.modelo.Usuario
 import com.example.proyectoparte2_marioherrero.modelo.tipoBebida
+import com.example.proyectoparte2_marioherrero.modelo.tipoTarjeta
 import java.time.LocalDate
 
 val listaUsuariosRegistrados: List<Usuario> = listOf(
@@ -43,7 +45,7 @@ val listaUsuariosRegistrados: List<Usuario> = listOf(
 
 @RequiresApi(Build.VERSION_CODES.O)
 val listaPedidos: List<Pedido> = listOf(
-    // Usuario 1
+    // Usuario 1 - Usa dos tarjetas (VISA y MasterCard)
     Pedido(
         id = 1,
         idUsuario = 1,
@@ -52,7 +54,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 1,
-        precio = 9.45
+        precio = 9.45,
+        pago = Pago(
+            id = 1,
+            tipoTarjeta = tipoTarjeta.VISA,
+            numeroTarjeta = "4111 2222 3333 4444",
+            fechaCaducidad = "08/27",
+            cvc = "123"
+        )
     ),
     Pedido(
         id = 2,
@@ -62,7 +71,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 2,
-        precio = 25.90
+        precio = 25.90,
+        pago = Pago(
+            id = 2,
+            tipoTarjeta = tipoTarjeta.VISA,
+            numeroTarjeta = "4111 2222 3333 4444",
+            fechaCaducidad = "08/27",
+            cvc = "123"
+        )
     ),
     Pedido(
         id = 3,
@@ -72,7 +88,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 3,
         bebida = Bebida(tipoBebida.SIN_BEBIDA),
         cantidadBebida = 0,
-        precio = 14.85
+        precio = 14.85,
+        pago = Pago(
+            id = 3,
+            tipoTarjeta = tipoTarjeta.MasterCard,
+            numeroTarjeta = "5500 6666 7777 8888",
+            fechaCaducidad = "12/28",
+            cvc = "456"
+        )
     ),
     Pedido(
         id = 4,
@@ -82,7 +105,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 2,
-        precio = 15.95
+        precio = 15.95,
+        pago = Pago(
+            id = 4,
+            tipoTarjeta = tipoTarjeta.MasterCard,
+            numeroTarjeta = "5500 6666 7777 8888",
+            fechaCaducidad = "12/28",
+            cvc = "456"
+        )
     ),
     Pedido(
         id = 5,
@@ -92,10 +122,17 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 1,
-        precio = 11.90
+        precio = 11.90,
+        pago = Pago(
+            id = 5,
+            tipoTarjeta = tipoTarjeta.VISA,
+            numeroTarjeta = "4111 2222 3333 4444",
+            fechaCaducidad = "08/27",
+            cvc = "123"
+        )
     ),
 
-    // Usuario 2
+    // Usuario 2 - Usa solo una tarjeta (Euro6000)
     Pedido(
         id = 6,
         idUsuario = 2,
@@ -104,7 +141,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 1,
-        precio = 9.45
+        precio = 9.45,
+        pago = Pago(
+            id = 6,
+            tipoTarjeta = tipoTarjeta.Euro6000,
+            numeroTarjeta = "6011 1234 5678 9999",
+            fechaCaducidad = "07/26",
+            cvc = "321"
+        )
     ),
     Pedido(
         id = 7,
@@ -114,7 +158,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 2,
-        precio = 25.90
+        precio = 25.90,
+        pago = Pago(
+            id = 7,
+            tipoTarjeta = tipoTarjeta.Euro6000,
+            numeroTarjeta = "6011 1234 5678 9999",
+            fechaCaducidad = "07/26",
+            cvc = "321"
+        )
     ),
     Pedido(
         id = 8,
@@ -124,7 +175,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.SIN_BEBIDA),
         cantidadBebida = 0,
-        precio = 6.95
+        precio = 6.95,
+        pago = Pago(
+            id = 8,
+            tipoTarjeta = tipoTarjeta.Euro6000,
+            numeroTarjeta = "6011 1234 5678 9999",
+            fechaCaducidad = "07/26",
+            cvc = "321"
+        )
     ),
     Pedido(
         id = 9,
@@ -134,7 +192,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 3,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 3,
-        precio = 40.35
+        precio = 40.35,
+        pago = Pago(
+            id = 9,
+            tipoTarjeta = tipoTarjeta.Euro6000,
+            numeroTarjeta = "6011 1234 5678 9999",
+            fechaCaducidad = "07/26",
+            cvc = "321"
+        )
     ),
     Pedido(
         id = 10,
@@ -144,10 +209,17 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 1,
-        precio = 6.95
+        precio = 6.95,
+        pago = Pago(
+            id = 10,
+            tipoTarjeta = tipoTarjeta.Euro6000,
+            numeroTarjeta = "6011 1234 5678 9999",
+            fechaCaducidad = "07/26",
+            cvc = "321"
+        )
     ),
 
-    // Usuario 3
+    // Usuario 3 - Usa dos tarjetas (MasterCard y VISA)
     Pedido(
         id = 11,
         idUsuario = 3,
@@ -156,7 +228,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 1,
-        precio = 12.95
+        precio = 12.95,
+        pago = Pago(
+            id = 11,
+            tipoTarjeta = tipoTarjeta.MasterCard,
+            numeroTarjeta = "5500 9999 1111 2222",
+            fechaCaducidad = "03/27",
+            cvc = "987"
+        )
     ),
     Pedido(
         id = 12,
@@ -166,7 +245,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 2,
-        precio = 18.90
+        precio = 18.90,
+        pago = Pago(
+            id = 12,
+            tipoTarjeta = tipoTarjeta.MasterCard,
+            numeroTarjeta = "5500 9999 1111 2222",
+            fechaCaducidad = "03/27",
+            cvc = "987"
+        )
     ),
     Pedido(
         id = 13,
@@ -176,7 +262,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 1,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 1,
-        precio = 12.95
+        precio = 12.95,
+        pago = Pago(
+            id = 13,
+            tipoTarjeta = tipoTarjeta.VISA,
+            numeroTarjeta = "4000 8888 7777 6666",
+            fechaCaducidad = "09/28",
+            cvc = "654"
+        )
     ),
     Pedido(
         id = 14,
@@ -186,7 +279,14 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 2,
         bebida = Bebida(tipoBebida.COLA),
         cantidadBebida = 2,
-        precio = 14.90
+        precio = 14.90,
+        pago = Pago(
+            id = 14,
+            tipoTarjeta = tipoTarjeta.MasterCard,
+            numeroTarjeta = "5500 9999 1111 2222",
+            fechaCaducidad = "03/27",
+            cvc = "987"
+        )
     ),
     Pedido(
         id = 15,
@@ -196,9 +296,17 @@ val listaPedidos: List<Pedido> = listOf(
         cantidadPizza = 3,
         bebida = Bebida(tipoBebida.AGUA),
         cantidadBebida = 3,
-        precio = 29.85
+        precio = 29.85,
+        pago = Pago(
+            id = 15,
+            tipoTarjeta = tipoTarjeta.VISA,
+            numeroTarjeta = "4000 8888 7777 6666",
+            fechaCaducidad = "09/28",
+            cvc = "654"
+        )
     )
 )
+
 
 
 // Precios de los productos

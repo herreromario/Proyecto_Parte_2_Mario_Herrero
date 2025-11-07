@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -34,6 +35,7 @@ import com.example.proyectoparte2_marioherrero.ui.viewmodel.PizzaTimeViewModel
 enum class Pantallas(@StringRes val titulo: Int) {
     PantallaInicial(titulo = R.string.pantalla_inicial),
     PantallaListarPedidos(titulo = R.string.pantalla_listar_pedidos),
+    PantallaDetallesPedido(titulo = R.string.pantalla_detalles_pedido)
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -48,17 +50,23 @@ fun PizzaTimeApp(
         pilaRetroceso?.destination?.route ?: Pantallas.PantallaInicial.name
     )
 
+    val pizzaTimeUIState by pizzaTimeViewModel.uiState.collectAsState()
+
     Scaffold(
         topBar = {
             AppTopBar(
                 pantallaActual = pantallaActual,
                 puedeNavegarAtras = navController.previousBackStackEntry != null,
-                onNavegarAtras = {navController.navigateUp()}
+                onNavegarAtras = {
+                    if (pantallaActual == Pantallas.PantallaDetallesPedido) {
+                        pizzaTimeViewModel.cargarPedidosUsuario(pizzaTimeUIState.usuarioActual.id)
+                    }
+                    navController.navigateUp()
+                }
+
             )
         }
     ) { innerPadding ->
-
-        val pizzaTimeUIState by pizzaTimeViewModel.uiState.collectAsState()
 
         NavHost(
             navController = navController,
@@ -78,10 +86,23 @@ fun PizzaTimeApp(
 
             composable(route = Pantallas.PantallaListarPedidos.name) {
                 PantallaListarPedidos(
+                    onBotonDetallesPulsado = { pedido ->
+                        pizzaTimeViewModel.seleccionarPedido(pedido)
+                        navController.navigate(Pantallas.PantallaDetallesPedido.name)
+                    },
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
                     pizzaTimeUIState = pizzaTimeUIState,
+                )
+            }
+
+            composable(route = Pantallas.PantallaDetallesPedido.name) {
+                PantallaDetallesPedido(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    pizzaTimeUIState = pizzaTimeUIState
                 )
             }
         }
