@@ -3,30 +3,19 @@ package com.example.proyectoparte2_marioherrero.ui.screens
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Pedido
+import com.example.proyectoparte2_marioherrero.modelo.tipoBebida
 import com.example.proyectoparte2_marioherrero.modelo.uistate.PizzaTimeUIState
 import com.example.proyectoparte2_marioherrero.ui.theme.AmarilloQuesoLight
 import com.example.proyectoparte2_marioherrero.ui.theme.RojoTomateLight
@@ -38,7 +27,6 @@ fun PantallaListarPedidos(
     modifier: Modifier = Modifier,
     pizzaTimeUIState: PizzaTimeUIState
 ) {
-
     val pedidos = pizzaTimeUIState.listaPedidos
 
     Column(
@@ -51,9 +39,13 @@ fun PantallaListarPedidos(
             text = "Lista de pedidos",
             style = MaterialTheme.typography.headlineLarge
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         LazyColumn(
-            modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(bottom = 16.dp)
         ) {
             items(pedidos) { pedido ->
                 TarjetaPedido(
@@ -65,12 +57,15 @@ fun PantallaListarPedidos(
     }
 }
 
+// Función InfoPedido reutilizable
 @Composable
 fun InfoPedido(
     icon: Int,
-    texto: String
+    texto: String,
+    modifier: Modifier = Modifier
 ) {
     Row(
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -79,48 +74,61 @@ fun InfoPedido(
             contentDescription = null,
             modifier = Modifier.size(20.dp)
         )
-        Text(
-            text = texto
-        )
+        Text(text = texto)
     }
 }
 
+
+// Tarjeta individual de pedido
 @Composable
 fun TarjetaPedido(
     pedido: Pedido,
     onBotonDetallesPulsado: (Pedido) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier
-        .fillMaxWidth()
-        .padding(horizontal = 4.dp),
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(AmarilloQuesoLight),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            InfoPedido(R.drawable.pizza, "${pedido.cantidadPizza} x Pizza ${pedido.pizza.nombre} (${pedido.pizza.tamaño})")
-            if(pedido.cantidadBebida > 0){
-                InfoPedido(R.drawable.bebida, "${pedido.cantidadBebida} x ${pedido.bebida.tipoBebida}")
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            InfoPedido(
+                R.drawable.pizza,
+                "${pedido.cantidadPizza} x Pizza ${pedido.pizza.nombre} (${pedido.pizza.tamaño})"
+            )
+
+            if (pedido.bebida.tipoBebida == tipoBebida.SIN_BEBIDA) {
+                InfoPedido(R.drawable.cruz, "Sin bebida")
             } else {
-                InfoPedido(R.drawable.bebida, stringResource(R.string.sin_bebida))
+                InfoPedido(
+                    R.drawable.bebida,
+                    "${pedido.cantidadBebida} x ${pedido.bebida.tipoBebida}"
+                )
             }
+
             InfoPedido(R.drawable.dinero, "${pedido.precio} €")
             InfoPedido(R.drawable.calendario, "${pedido.fecha}")
+
             Row(
-                modifier = modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
                 Button(
                     onClick = { onBotonDetallesPulsado(pedido) },
                     colors = ButtonDefaults.buttonColors(RojoTomateLight),
+                    shape = RoundedCornerShape(8.dp)
                 ) {
-                    Text(
-                        text = "Detalles"
-                    )
+                    Text(text = "Detalles")
                 }
             }
         }
     }
 }
-
