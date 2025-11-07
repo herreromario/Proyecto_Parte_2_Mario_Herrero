@@ -130,7 +130,6 @@ fun AppTopBar(
                         contentDescription = stringResource(R.string.atras)
                     )
                 }
-
             }
         }
     )
