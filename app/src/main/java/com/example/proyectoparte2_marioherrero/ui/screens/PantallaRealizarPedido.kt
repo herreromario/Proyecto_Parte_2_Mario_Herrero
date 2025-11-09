@@ -33,8 +33,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.datos.listaPizzasDisponibles
 import com.example.proyectoparte2_marioherrero.modelo.Pedido
 import com.example.proyectoparte2_marioherrero.modelo.Pizza
@@ -76,7 +78,7 @@ fun PantallaRealizarPedido(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Realizar un pedido",
+            text = stringResource(R.string.realizar_un_pedido),
             style = MaterialTheme.typography.headlineLarge
         )
 
@@ -126,7 +128,7 @@ fun ElegirPizza(
     onPizzaSelecionada: (Pizza) -> Unit,
     pedidoActual: Pedido?
 ){
-    SeccionTitulo("Selecciona una pizza")
+    SeccionTitulo(stringResource(R.string.selecciona_una_pizza))
 
     Column(modifier = Modifier
         .padding(vertical = 8.dp)) {
@@ -139,7 +141,7 @@ fun ElegirPizza(
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(12.dp))
-                        .background( if(pedidoActual?.pizza?.nombre == pizza.nombre) AmarilloQuesoLight else MaterialTheme.colorScheme.primaryContainer)
+                        .background(if (pedidoActual?.pizza?.nombre == pizza.nombre) AmarilloQuesoLight else MaterialTheme.colorScheme.primaryContainer)
                         .clickable { onPizzaSelecionada(pizza) }
                         .padding(8.dp),
                 ){
@@ -255,8 +257,9 @@ fun CambiarIngrediente(
                 contentDescription = if (checked) "Con $etiqueta" else "Sin $etiqueta"
             )
         }
-        Text(text = if (checked) "Con $etiqueta" else "Sin $etiqueta")
-    }
+        Text(
+            text = if (checked) stringResource(R.string.con, etiqueta) else stringResource(R.string.sin, etiqueta)
+        ) }
 }
 
 @Composable
@@ -289,7 +292,7 @@ fun CambiarCarne(
                 .padding(bottom = 4.dp)
         ) {
             Text(
-                "Selecciona el tipo de carne",
+                stringResource(R.string.selecciona_el_tipo_de_carne),
                 fontWeight =  FontWeight.SemiBold
             )
         }
@@ -303,7 +306,7 @@ fun CambiarCarne(
                     modifier = Modifier
                         .clip(RoundedCornerShape(12.dp))
                         .background(if (pizza.carne == carne) AmarilloQuesoLight else MaterialTheme.colorScheme.primaryContainer)
-                        .clickable{ onCarneSeleccionada(carne) }
+                        .clickable { onCarneSeleccionada(carne) }
                         .padding(8.dp),
                 ){
                     Text(
@@ -321,7 +324,7 @@ fun ElegirTamaño(
     pedidoActual: Pedido?,
     onTamañoSeleccionado: (TamañoPizza) -> Unit
 ){
-    SeccionTitulo("Selecciona un tamaño")
+    SeccionTitulo(stringResource(R.string.selecciona_un_tama_o))
 
     Column(modifier = Modifier
         .padding(vertical = 8.dp)) {
@@ -354,7 +357,7 @@ fun CambiarCantidadPizza(
     onDisminuirCantidadPizza: () -> Unit,
     pedidoActual: Pedido?,
 ){
-    SeccionTitulo("Cantidad de pizzas")
+    SeccionTitulo(stringResource(R.string.cantidad_de_pizzas))
 
     ContadorCantidad(
         cantidad = pedidoActual?.cantidadPizza ?: return,
@@ -369,7 +372,7 @@ fun ElegirBebida(
     onBebidaSeleccionada: (tipoBebida) -> Unit,
     pedidoActual: Pedido?
 ){
-    SeccionTitulo("Selecciona una bebida")
+    SeccionTitulo(stringResource(R.string.selecciona_una_bebida))
 
     Column(modifier = Modifier
         .padding(vertical = 8.dp)) {
@@ -382,7 +385,7 @@ fun ElegirBebida(
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(12.dp))
-                        .background(if(pedidoActual?.bebida?.tipoBebida == bebida) AmarilloQuesoLight else MaterialTheme.colorScheme.primaryContainer)
+                        .background(if (pedidoActual?.bebida?.tipoBebida == bebida) AmarilloQuesoLight else MaterialTheme.colorScheme.primaryContainer)
                         .clickable { onBebidaSeleccionada(bebida) }
                         .padding(8.dp)
                 ){
@@ -405,7 +408,7 @@ fun CambiarCantidadBebida(
     val bebida = pedidoActual?.bebida?.tipoBebida
 
     if(bebida != tipoBebida.SIN_BEBIDA){
-        SeccionTitulo("Cantidad de bebidas")
+        SeccionTitulo(stringResource(R.string.cantidad_de_bebidas))
 
         ContadorCantidad(
             cantidad = pedidoActual?.cantidadBebida ?: return,
@@ -485,7 +488,7 @@ fun PrecioProcederPago(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Precio: %.2f €".format(pedidoActual?.precio ?: 0.0),
+            text = stringResource(R.string.precio_2f).format(pedidoActual?.precio ?: 0.0),
             style = MaterialTheme.typography.titleLarge
         )
         Row(
@@ -501,7 +504,7 @@ fun PrecioProcederPago(
                     .size(width = 250.dp, height = 70.dp)
             ) {
                 Text(
-                    text = "Proceder con el pago",
+                    text = stringResource(R.string.proceder_con_el_pago),
                     style = MaterialTheme.typography.titleMedium
                 )
             }

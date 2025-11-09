@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Usuario
@@ -140,7 +141,7 @@ fun PreguntarOpcion(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "¿Qué prefieres hacer?",
+            text = stringResource(R.string.qu_prefieres_hacer),
             style = MaterialTheme.typography.headlineLarge
         )
         BotonRealizarPedido(onClick = {onBotonRealizarPedidoPulsado()})
@@ -160,7 +161,7 @@ fun BotonRealizarPedido(
             .padding(20.dp)
             .size(width = 250.dp, height = 70.dp)
     ) {
-        Text(text = "Realizar pedido", style = MaterialTheme.typography.titleMedium)
+        Text(text = stringResource(R.string.realizar_pedido), style = MaterialTheme.typography.titleMedium)
     }
 }
 
@@ -176,6 +177,6 @@ fun BotonRealizarPedido(
             .padding(20.dp)
             .size(width = 250.dp, height = 70.dp)
     ) {
-        Text(text = "Listar pedidos", style = MaterialTheme.typography.titleMedium)
+        Text(text = stringResource(R.string.listar_pedidos), style = MaterialTheme.typography.titleMedium)
     }
 }

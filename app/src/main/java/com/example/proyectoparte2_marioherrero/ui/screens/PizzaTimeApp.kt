@@ -28,6 +28,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Bebida
 import com.example.proyectoparte2_marioherrero.modelo.tipoBebida
@@ -39,7 +40,9 @@ enum class Pantallas(@StringRes val titulo: Int) {
     PantallaListarPedidos(titulo = R.string.pantalla_listar_pedidos),
     PantallaDetallesPedido(titulo = R.string.pantalla_detalles_pedido),
     PantallaRealizarPedido(titulo = R.string.pantalla_realizar_pedido),
-    PantallaFormularioPago(titulo = R.string.pantalla_formulario_pago)
+    PantallaFormularioPago(titulo = R.string.pantalla_formulario_pago),
+    PantallaResumenPedido(titulo = R.string.pantalla_resumen_de_pedido),
+    PantallaPedidoRealizado(titulo = R.string.pantalla_pedido_realizado)
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -135,7 +138,9 @@ fun PizzaTimeApp(
                     },
                     onAumentarCantidadBebida = { pizzaTimeViewModel.aumentarCantidadBebida() },
                     onDisminuirCantidadBebida = { pizzaTimeViewModel.disminuirCantidadBebida() },
-                    onProcecerPago = { navController.navigate(Pantallas.PantallaFormularioPago.name) },
+                    onProcecerPago = {
+                        navController.navigate(Pantallas.PantallaFormularioPago.name)
+                        pizzaTimeViewModel.agregarPedido() },
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
@@ -145,9 +150,39 @@ fun PizzaTimeApp(
 
             composable(route = Pantallas.PantallaFormularioPago.name){
                 PantallaFormularioPago(
+                    onTarjetaSeleccionada = { tarjeta ->
+                        pizzaTimeViewModel.seleccionarTipoTarjeta(tarjeta)
+                    },
+                    onCambiarNumeroTarjeta = { pizzaTimeViewModel.cambiarNumeroTarjeta(it) },
+                    onCambiarFechaCaducidad = { pizzaTimeViewModel.cambiarFechaCaducidad(it)},
+                    onCambiarCodigoSeguridad = { pizzaTimeViewModel.cambiarCodigoSeguridad(it) },
+                    onPagarPulsado = { navController.navigate(Pantallas.PantallaResumenPedido.name)},
+                    onVolverAtrasPulsado = { navController.navigate(Pantallas.PantallaRealizarPedido.name)},
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+                        .padding(16.dp),
+                    pizzaTimeUIState = pizzaTimeUIState
+                )
+            }
+
+            composable(route = Pantallas.PantallaResumenPedido.name){
+                PantallaResumenPedido(
+                    onFinalizarPedido = { navController.navigate(Pantallas.PantallaPedidoRealizado.name)},
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    pizzaTimeUIState = pizzaTimeUIState
+                )
+            }
+
+            composable(route = Pantallas.PantallaPedidoRealizado.name){
+                PantallaPedidoRealizado(
+                    onVolverInicio = { navController.popBackStack(Pantallas.PantallaInicial.name, inclusive = false)
+                                     pizzaTimeViewModel.limpiarPedidoActual()},
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    pizzaTimeUIState = pizzaTimeUIState
                 )
             }
         }

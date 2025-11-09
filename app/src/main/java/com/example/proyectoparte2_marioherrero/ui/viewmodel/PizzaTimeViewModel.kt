@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.time.LocalDate
 
 class PizzaTimeViewModel : ViewModel() {
 
@@ -20,10 +21,11 @@ class PizzaTimeViewModel : ViewModel() {
 
     private lateinit var listaPedidosActual: List<Pedido>
 
-    // 🔹 Cargar pedidos de un usuario
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun cargarPedidosUsuario(idUsuario: Int) {
         listaPedidosActual = listaPedidos.filter { it.idUsuario == idUsuario }
+        listaPedidosActual = listaPedidosActual.reversed()
         _uiState.value = PizzaTimeUIState(listaPedidos = listaPedidosActual)
     }
 
@@ -31,14 +33,13 @@ class PizzaTimeViewModel : ViewModel() {
     fun iniciarPedido() {
         val pedidoBase = _uiState.value.pedidoActual ?: return
 
-        // Si la bebida no es SIN_BEBIDA, aseguramos cantidad mínima 1
+
         val cantidadBebidaInicial = if (pedidoBase.bebida.tipoBebida == tipoBebida.SIN_BEBIDA) 0 else 1
 
         val pedidoInicial = pedidoBase.copy(
             cantidadBebida = cantidadBebidaInicial
         )
 
-        // Calculamos el precio inicial
         val precioInicial = calcularPrecioPedido(pedidoInicial)
 
         _uiState.value = _uiState.value.copy(
@@ -46,13 +47,13 @@ class PizzaTimeViewModel : ViewModel() {
         )
     }
 
-    // 🔹 Seleccionar pedido ya existente
+    // Seleccionar pedido ya existente
     @RequiresApi(Build.VERSION_CODES.O)
     fun seleccionarPedido(pedido: Pedido) {
         _uiState.value = _uiState.value.copy(pedidoSeleccionado = pedido)
     }
 
-    // 🔹 Función general para recalcular precio y actualizar el pedido actual
+    // Función general para recalcular precio y actualizar el pedido actual
     @RequiresApi(Build.VERSION_CODES.O)
     private fun actualizarPedido(pedidoActualizado: Pedido) {
         val nuevoPrecio = calcularPrecioPedido(pedidoActualizado)
@@ -61,7 +62,7 @@ class PizzaTimeViewModel : ViewModel() {
         }
     }
 
-    // 🔹 Cambiar tipo de pizza
+    // Cambiar tipo de pizza
     @RequiresApi(Build.VERSION_CODES.O)
     fun seleccionarPizza(nuevaPizza: Pizza) {
         val pedido = _uiState.value.pedidoActual ?: return
@@ -77,7 +78,7 @@ class PizzaTimeViewModel : ViewModel() {
         actualizarPedido(pedido.copy(pizza = pizzaConTamaño))
     }
 
-    // 🔹 Cambiar tamaño de pizza
+    // Cambiar tamaño de pizza
     @RequiresApi(Build.VERSION_CODES.O)
     fun seleccionarTamaño(tamaño: TamañoPizza) {
         val pedido = _uiState.value.pedidoActual ?: return
@@ -99,7 +100,7 @@ class PizzaTimeViewModel : ViewModel() {
     }
 
 
-    // 🔹 Cambiar carne (solo Barbacoa)
+    // Cambiar carne (solo Barbacoa)
     @RequiresApi(Build.VERSION_CODES.O)
     fun cambiarCarne(carne: TipoCarne) {
         val pedido = _uiState.value.pedidoActual ?: return
@@ -109,7 +110,7 @@ class PizzaTimeViewModel : ViewModel() {
         }
     }
 
-    // 🔹 Cambiar propiedades extra
+    // Cambiar propiedades extra
     @RequiresApi(Build.VERSION_CODES.O)
     fun onPiñaPulsado() {
         val pedido = _uiState.value.pedidoActual ?: return
@@ -137,7 +138,7 @@ class PizzaTimeViewModel : ViewModel() {
         }
     }
 
-    // 🔹 Aumentar / disminuir cantidad de pizzas
+    // Aumentar / disminuir cantidad de pizzas
     @RequiresApi(Build.VERSION_CODES.O)
     fun aumentarCantidadPizza() {
         val pedido = _uiState.value.pedidoActual ?: return
@@ -152,7 +153,7 @@ class PizzaTimeViewModel : ViewModel() {
         }
     }
 
-    // 🔹 Cambiar bebida
+    // Cambiar bebida
     @RequiresApi(Build.VERSION_CODES.O)
     fun seleccionarBebida(nuevaBebida: Bebida) {
         val pedido = _uiState.value.pedidoActual ?: return
@@ -200,7 +201,7 @@ class PizzaTimeViewModel : ViewModel() {
     }
 
 
-    // 🔹 Calcular el precio total
+    // Calcular el precio total
     @RequiresApi(Build.VERSION_CODES.O)
     private fun calcularPrecioPedido(pedido: Pedido): Double {
         val precioPizza = when (pedido.pizza.tamaño) {
@@ -218,11 +219,90 @@ class PizzaTimeViewModel : ViewModel() {
         return (precioPizza * pedido.cantidadPizza) + (precioBebida * pedido.cantidadBebida)
     }
 
-    // 🔹 Actualizar pago
     @RequiresApi(Build.VERSION_CODES.O)
-    fun actualizarPago(pago: Pago) {
-        _uiState.update { actual ->
-            actual.copy(pedidoActual = actual.pedidoActual?.copy(pago = pago))
+    fun seleccionarTipoTarjeta(tipoTarjeta: tipoTarjeta){
+        val pedido = _uiState.value.pedidoActual ?: return
+        val pago = pedido.pago
+
+        actualizarPedido(pedido.copy(pago = pago.copy(tipoTarjeta = tipoTarjeta)))
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun cambiarNumeroTarjeta(numeroTarjeta: String){
+        val pedido = _uiState.value.pedidoActual ?: return
+        val pago = pedido.pago
+
+        actualizarPedido(pedido.copy(pago = pago.copy(numeroTarjeta = numeroTarjeta)))
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun cambiarFechaCaducidad(fechaCaducidad: String){
+        val pedido = _uiState.value.pedidoActual ?: return
+        val pago = pedido.pago
+
+        actualizarPedido(pedido.copy(pago = pago.copy(fechaCaducidad = fechaCaducidad)))
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun cambiarCodigoSeguridad(codigoSeguridad: String){
+        val pedido = _uiState.value.pedidoActual ?: return
+        val pago = pedido.pago
+
+        actualizarPedido(pedido.copy(pago = pago.copy(cvc = codigoSeguridad)))
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun agregarPedido() {
+        val pedidoActual = _uiState.value.pedidoActual ?: return
+        val usuario = _uiState.value.usuarioActual
+
+        val nuevoId = listaPedidos.size + 1
+
+        val pedidoFinal = pedidoActual.copy(
+            id = nuevoId,
+            idUsuario = usuario.id,
+            pago = pedidoActual.pago.copy(id = nuevoId),
+            fecha = LocalDate.now()
+        )
+
+        listaPedidos.add(pedidoFinal)
+
+        _uiState.update {
+            it.copy(
+                listaPedidos = listaPedidos.filter { p -> p.idUsuario == usuario.id },
+                pedidoSeleccionado = pedidoFinal,
+                pedidoActual = pedidoFinal
+            )
         }
     }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun limpiarPedidoActual() {
+        val pedidoVacio = Pedido(
+            id = 0,
+            idUsuario = _uiState.value.usuarioActual.id,
+            fecha = LocalDate.now(),
+            pizza = PizzaMargarita(tamaño = TamañoPizza.PEQUEÑA, piña = false, vegana = false), // o Pizza() según tu modelo
+            cantidadPizza = 0,
+            bebida = Bebida(tipoBebida.SIN_BEBIDA),
+            cantidadBebida = 0,
+            precio = 0.0,
+            pago = Pago(
+                id = 0,
+                tipoTarjeta = tipoTarjeta.VISA,
+                numeroTarjeta = "",
+                fechaCaducidad = "",
+                cvc = ""
+            )
+        )
+
+        _uiState.value = _uiState.value.copy(
+            pedidoActual = pedidoVacio
+        )
+    }
+
+
 }
+
+

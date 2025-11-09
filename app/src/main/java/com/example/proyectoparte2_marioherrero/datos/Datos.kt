@@ -45,7 +45,7 @@ val listaUsuariosRegistrados: List<Usuario> = listOf(
 )
 
 @RequiresApi(Build.VERSION_CODES.O)
-val listaPedidos: List<Pedido> = listOf(
+var listaPedidos= mutableListOf(
     // Usuario 1 - Usa dos tarjetas (VISA y MasterCard)
     Pedido(
         id = 1,

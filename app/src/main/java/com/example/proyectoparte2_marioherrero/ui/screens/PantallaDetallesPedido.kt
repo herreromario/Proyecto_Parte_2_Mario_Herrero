@@ -44,7 +44,7 @@ fun PantallaDetallesPedido(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Detalles del pedido",
+            text = stringResource(R.string.detalles_del_pedido),
             style = MaterialTheme.typography.headlineLarge
         )
 
@@ -123,13 +123,13 @@ fun TarjetaDetallesPedido(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Text(text = "Pedido #${pedido.id}")
+                    Text(text = stringResource(R.string.pedido, pedido.id))
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Text(text = "Realizado el día ${pedido.fecha}")
+                    Text(text = stringResource(R.string.realizado_el_d_a, pedido.fecha))
                 }
             }
         }
@@ -213,7 +213,7 @@ fun TarjetaDetallesPago(
     pedido: Pedido?,
     modifier: Modifier = Modifier
 ) {
-    SeccionTitulo("Método de pago")
+    SeccionTitulo(stringResource(R.string.m_todo_de_pago))
 
     Card(
         modifier = modifier
@@ -231,8 +231,10 @@ fun TarjetaDetallesPago(
             if (pedido == null) {
                 CargandoDetalles()
             } else{
-                Text("Pagado con tarjeta ${pedido.pago.tipoTarjeta}")
-                Text("Tarjeta acabada en ${pedido.pago.numeroTarjeta.takeLast(4)}")
+                Text(stringResource(R.string.pagado_con_tarjeta, pedido.pago.tipoTarjeta))
+                Text(
+                    stringResource(
+                        R.string.tarjeta_acabada_en, pedido.pago.numeroTarjeta.takeLast(4)))
             }
         }
     }
