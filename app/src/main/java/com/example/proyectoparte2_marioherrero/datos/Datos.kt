@@ -6,6 +6,7 @@ import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Bebida
 import com.example.proyectoparte2_marioherrero.modelo.Pago
 import com.example.proyectoparte2_marioherrero.modelo.Pedido
+import com.example.proyectoparte2_marioherrero.modelo.Pizza
 import com.example.proyectoparte2_marioherrero.modelo.PizzaBarbacoa
 import com.example.proyectoparte2_marioherrero.modelo.PizzaMargarita
 import com.example.proyectoparte2_marioherrero.modelo.PizzaRomana
@@ -307,7 +308,11 @@ val listaPedidos: List<Pedido> = listOf(
     )
 )
 
-
+val listaPizzasDisponibles: List<Pizza> = listOf(
+    PizzaMargarita(tamaño = TamañoPizza.PEQUEÑA, piña = false, vegana = false),
+    PizzaBarbacoa(tamaño = TamañoPizza.PEQUEÑA, carne = TipoCarne.POLLO),
+    PizzaRomana(tamaño = TamañoPizza.PEQUEÑA, champiñones = false)
+)
 
 // Precios de los productos
 

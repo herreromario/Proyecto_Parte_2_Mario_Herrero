@@ -37,6 +37,7 @@ import kotlin.Unit
 fun PantallaInicial(
     modifier: Modifier = Modifier,
     onBotonListarPedidosPulsado: () -> Unit,
+    onBotonRealizarPedidoPulsado: () -> Unit,
     pizzaTimeUIState: PizzaTimeUIState
 ) {
     val usuario = pizzaTimeUIState.usuarioActual
@@ -53,7 +54,8 @@ fun PantallaInicial(
         Spacer(modifier = Modifier.height(20.dp))
         PreguntarOpcion(
             modifier = modifier,
-            onBotonListarPedidosPulsado = onBotonListarPedidosPulsado
+            onBotonListarPedidosPulsado = onBotonListarPedidosPulsado,
+            onBotonRealizarPedidoPulsado = onBotonRealizarPedidoPulsado
         )
     }
 }
@@ -128,7 +130,8 @@ fun TarjetaPizzaTime(modifier: Modifier) {
 @Composable
 fun PreguntarOpcion(
     modifier: Modifier = Modifier,
-    onBotonListarPedidosPulsado: () -> Unit
+    onBotonListarPedidosPulsado: () -> Unit,
+    onBotonRealizarPedidoPulsado: () -> Unit
 ){
     Column(
         modifier = Modifier
@@ -140,7 +143,7 @@ fun PreguntarOpcion(
             text = "¿Qué prefieres hacer?",
             style = MaterialTheme.typography.headlineLarge
         )
-        BotonRealizarPedido(onClick = {onBotonListarPedidosPulsado()})
+        BotonRealizarPedido(onClick = {onBotonRealizarPedidoPulsado()})
         BotonListarPedidos(onClick = {onBotonListarPedidosPulsado()})
     }
 }

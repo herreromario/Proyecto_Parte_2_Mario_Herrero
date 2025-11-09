@@ -180,6 +180,7 @@ fun TarjetaDetallesPedido(
                             InfoPedido(R.drawable.cruz, "Sin champiñones")
                         }
                     }
+                    else -> {}
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))

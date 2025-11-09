@@ -29,13 +29,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.proyectoparte2_marioherrero.R
+import com.example.proyectoparte2_marioherrero.modelo.Bebida
+import com.example.proyectoparte2_marioherrero.modelo.tipoBebida
 import com.example.proyectoparte2_marioherrero.modelo.uistate.PizzaTimeUIState
 import com.example.proyectoparte2_marioherrero.ui.viewmodel.PizzaTimeViewModel
 
 enum class Pantallas(@StringRes val titulo: Int) {
     PantallaInicial(titulo = R.string.pantalla_inicial),
     PantallaListarPedidos(titulo = R.string.pantalla_listar_pedidos),
-    PantallaDetallesPedido(titulo = R.string.pantalla_detalles_pedido)
+    PantallaDetallesPedido(titulo = R.string.pantalla_detalles_pedido),
+    PantallaRealizarPedido(titulo = R.string.pantalla_realizar_pedido),
+    PantallaFormularioPago(titulo = R.string.pantalla_formulario_pago)
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -79,6 +83,10 @@ fun PizzaTimeApp(
                         pizzaTimeViewModel.cargarPedidosUsuario(pizzaTimeUIState.usuarioActual.id)
                         navController.navigate(Pantallas.PantallaListarPedidos.name)
                     },
+                    onBotonRealizarPedidoPulsado = {
+                        pizzaTimeViewModel.iniciarPedido()
+                        navController.navigate(Pantallas.PantallaRealizarPedido.name)
+                    },
                     modifier = Modifier.fillMaxSize(),
                     pizzaTimeUIState = pizzaTimeUIState
                 )
@@ -103,6 +111,43 @@ fun PizzaTimeApp(
                         .fillMaxSize()
                         .padding(16.dp),
                     pizzaTimeUIState = pizzaTimeUIState
+                )
+            }
+
+            composable(route = Pantallas.PantallaRealizarPedido.name) {
+                PantallaRealizarPedido(
+                    onPizzaSelecionada = { pizza ->
+                        pizzaTimeViewModel.seleccionarPizza(pizza)
+                    },
+                    onPiñaPulsado = { pizzaTimeViewModel.onPiñaPulsado() },
+                    onVeganoPulsado = { pizzaTimeViewModel.onVeganoPulsado()},
+                    onChampiñonesPulsado = { pizzaTimeViewModel.onChampiñonesPulsado() },
+                    onCarneSeleccionada = { carne ->
+                        pizzaTimeViewModel.cambiarCarne(carne)
+                    },
+                    onTamañoSeleccionado = { tamaño ->
+                        pizzaTimeViewModel.seleccionarTamaño(tamaño)
+                                           },
+                    onAumentarCantidadPizza = { pizzaTimeViewModel.aumentarCantidadPizza() },
+                    onDisminuirCantidadPizza = { pizzaTimeViewModel.disminuirCantidadPizza() },
+                    onBebidaSeleccionada = { bebida ->
+                        pizzaTimeViewModel.seleccionarBebida(Bebida(bebida))
+                    },
+                    onAumentarCantidadBebida = { pizzaTimeViewModel.aumentarCantidadBebida() },
+                    onDisminuirCantidadBebida = { pizzaTimeViewModel.disminuirCantidadBebida() },
+                    onProcecerPago = { navController.navigate(Pantallas.PantallaFormularioPago.name) },
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    pizzaTimeUIState = pizzaTimeUIState
+                )
+            }
+
+            composable(route = Pantallas.PantallaFormularioPago.name){
+                PantallaFormularioPago(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
                 )
             }
         }
