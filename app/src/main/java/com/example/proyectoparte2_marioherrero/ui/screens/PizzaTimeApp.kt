@@ -138,9 +138,7 @@ fun PizzaTimeApp(
                     },
                     onAumentarCantidadBebida = { pizzaTimeViewModel.aumentarCantidadBebida() },
                     onDisminuirCantidadBebida = { pizzaTimeViewModel.disminuirCantidadBebida() },
-                    onProcecerPago = {
-                        navController.navigate(Pantallas.PantallaFormularioPago.name)
-                        pizzaTimeViewModel.agregarPedido() },
+                    onProcecerPago = {navController.navigate(Pantallas.PantallaFormularioPago.name)},
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
@@ -156,7 +154,8 @@ fun PizzaTimeApp(
                     onCambiarNumeroTarjeta = { pizzaTimeViewModel.cambiarNumeroTarjeta(it) },
                     onCambiarFechaCaducidad = { pizzaTimeViewModel.cambiarFechaCaducidad(it)},
                     onCambiarCodigoSeguridad = { pizzaTimeViewModel.cambiarCodigoSeguridad(it) },
-                    onPagarPulsado = { navController.navigate(Pantallas.PantallaResumenPedido.name)},
+                    onPagarPulsado = { navController.navigate(Pantallas.PantallaResumenPedido.name)
+                        pizzaTimeViewModel.agregarPedido()},
                     onVolverAtrasPulsado = { navController.navigate(Pantallas.PantallaRealizarPedido.name)},
                     modifier = Modifier
                         .fillMaxSize()

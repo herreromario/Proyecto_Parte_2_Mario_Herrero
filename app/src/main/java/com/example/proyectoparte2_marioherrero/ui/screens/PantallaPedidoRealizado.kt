@@ -82,15 +82,14 @@ fun PantallaPedidoRealizado(
 
         TarjetaDetallesPedido(pedido = pedido)
 
-
         // Botón enviar justificante
         Button(
             onClick = { enviarJustificantePorCorreo() },
-            colors = ButtonDefaults.buttonColors(containerColor = AmarilloQuesoLight),
-            shape = RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = RojoTomateLight),
+            shape = RoundedCornerShape(5.dp),
             modifier = Modifier
-                .fillMaxWidth()
-                .size(height = 60.dp, width = 250.dp)
+                .padding(20.dp)
+                .size(width = 300.dp, height = 70.dp)
         ) {
             Text(
                 text = stringResource(R.string.enviar_justificante_por_correo),
@@ -98,14 +97,13 @@ fun PantallaPedidoRealizado(
             )
         }
 
-
         Button(
             onClick = onVolverInicio,
-            colors = ButtonDefaults.buttonColors(containerColor = AmarilloQuesoLight),
-            shape = RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = RojoTomateLight),
+            shape = RoundedCornerShape(5.dp),
             modifier = Modifier
-                .fillMaxWidth()
-                .size(height = 60.dp, width = 250.dp)
+                .padding(20.dp)
+                .size(width = 250.dp, height = 70.dp)
         ) {
             Text(
                 text = stringResource(R.string.volver_al_inicio),

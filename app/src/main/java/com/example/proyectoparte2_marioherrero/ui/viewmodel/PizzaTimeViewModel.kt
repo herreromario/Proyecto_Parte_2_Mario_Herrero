@@ -301,8 +301,6 @@ class PizzaTimeViewModel : ViewModel() {
             pedidoActual = pedidoVacio
         )
     }
-
-
 }
 
 
