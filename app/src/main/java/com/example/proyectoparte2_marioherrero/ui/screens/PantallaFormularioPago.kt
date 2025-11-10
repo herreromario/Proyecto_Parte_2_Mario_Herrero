@@ -20,8 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Pedido
 import com.example.proyectoparte2_marioherrero.modelo.tipoTarjeta
 import com.example.proyectoparte2_marioherrero.modelo.uistate.PizzaTimeUIState
@@ -48,7 +50,7 @@ fun PantallaFormularioPago(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Formulario de pago",
+            text = stringResource(R.string.formulario_de_pago),
             style = MaterialTheme.typography.headlineLarge
         )
         ElegirTipoTarjeta(
@@ -80,7 +82,7 @@ fun ElegirTipoTarjeta(
     onTarjetaSeleccionada: (tipoTarjeta) -> Unit,
     pedidoActual: Pedido?
 ){
-    SeccionTitulo("Selecciona un tipo de tarjeta")
+    SeccionTitulo(stringResource(R.string.selecciona_un_tipo_de_tarjeta))
 
     Column(
         modifier = Modifier
@@ -115,7 +117,7 @@ fun CambiarNumeroTarjeta(
     pedidoActual: Pedido?,
 
 ){
-    SeccionTitulo("Numero de tarjeta")
+    SeccionTitulo(stringResource(R.string.numero_de_tarjeta))
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
@@ -127,7 +129,7 @@ fun CambiarNumeroTarjeta(
         },
         placeholder = { Text(text = "0000 0000 0000 0000") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-        label = { Text("Numero de la tarjeta") }
+        label = { Text(stringResource(R.string.numero_de_la_tarjeta)) }
     )
 }
 
@@ -137,7 +139,7 @@ fun CambiarFechaYCodigoSeguridad(
     onCambiarFechaCaducidad: (String) -> Unit,
     onCambiarCodigoSeguridad: (String) -> Unit
 ){
-    SeccionTitulo("Fecha de caducidad / CVC")
+    SeccionTitulo(stringResource(R.string.fecha_de_caducidad_cvc))
 
     Row(
         modifier = Modifier
@@ -156,7 +158,7 @@ fun CambiarFechaYCodigoSeguridad(
             },
             placeholder = { Text(text = "MM/AA") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            label = { Text("Fecha") }
+            label = { Text(stringResource(R.string.fecha)) }
         )
 
         // Código de seguridad
@@ -186,7 +188,7 @@ fun PagarPedido(
             .padding(top = 12.dp),
     ) {
         Text(
-            text = "Precio: %.2f €".format(pedidoActual?.precio ?: 0.0),
+            text = stringResource(id = R.string.precio_2f).format(pedidoActual?.precio ?: 0.0),
             style = MaterialTheme.typography.titleLarge
         )
         Row(
@@ -204,7 +206,7 @@ fun PagarPedido(
                     .size(width = 250.dp, height = 70.dp)
             ) {
                 Text(
-                    text = "Pagar y finalizar",
+                    text = stringResource(R.string.pagar_y_finalizar),
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -232,7 +234,7 @@ fun VolverAtras(
                 .size(width = 250.dp, height = 70.dp)
         ) {
             Text(
-                text = "Volver atrás",
+                text = stringResource(R.string.volver_atras),
                 style = MaterialTheme.typography.titleMedium
             )
         }

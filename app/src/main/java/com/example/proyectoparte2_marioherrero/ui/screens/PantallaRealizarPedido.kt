@@ -173,7 +173,7 @@ fun ElegirExtras(
                 modifier = Modifier.padding(horizontal = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Personalizar Pizza ${pedidoActual?.pizza?.nombre}")
+                Text(stringResource(R.string.personalizar_pizza, pedidoActual?.pizza?.nombre ?: return@Card))
                 TarjetaBoton(
                     abierto = abierto,
                     onClick = { abierto = !abierto }
@@ -207,19 +207,19 @@ fun MostrarExtras(
         when (val pizza = pedidoActual?.pizza) {
             is PizzaMargarita -> {
                 CambiarIngrediente(
-                    etiqueta = "piña",
+                    etiqueta = stringResource(R.string.pina),
                     checked = pizza.piña,
                     onCheckedChange = { onPiñaPulsado() }
                 )
                 CambiarIngrediente(
-                    etiqueta = "opción vegana",
+                    etiqueta = stringResource(R.string.opcion_vegana),
                     checked = pizza.vegana,
                     onCheckedChange = { onVeganoPulsado() }
                 )
             }
             is PizzaRomana -> {
                 CambiarIngrediente(
-                    etiqueta = "champiñones",
+                    etiqueta = stringResource(R.string.champinones),
                     checked = pizza.champiñones,
                     onCheckedChange = { onChampiñonesPulsado() }
                 )
@@ -324,7 +324,7 @@ fun ElegirTamaño(
     pedidoActual: Pedido?,
     onTamañoSeleccionado: (TamañoPizza) -> Unit
 ){
-    SeccionTitulo(stringResource(R.string.selecciona_un_tama_o))
+    SeccionTitulo(stringResource(R.string.selecciona_un_tamano))
 
     Column(modifier = Modifier
         .padding(vertical = 8.dp)) {

@@ -16,7 +16,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.uistate.PizzaTimeUIState
 import com.example.proyectoparte2_marioherrero.ui.theme.RojoTomateLight
 
@@ -36,7 +38,7 @@ fun PantallaResumenPedido(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Resumen del pedido",
+            text = stringResource(R.string.resumen_del_pedido),
             style = MaterialTheme.typography.headlineLarge
         )
 
@@ -70,7 +72,7 @@ fun FinalizarPedido(
                 .size(width = 250.dp, height = 70.dp)
         ) {
             Text(
-                text = "Finalizar pedido",
+                text = stringResource(R.string.finalizar_pedido),
                 style = MaterialTheme.typography.titleMedium
             )
         }

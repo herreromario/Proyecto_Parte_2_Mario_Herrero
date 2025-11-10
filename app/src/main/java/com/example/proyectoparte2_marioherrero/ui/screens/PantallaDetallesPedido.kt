@@ -75,7 +75,7 @@ fun TarjetaDetallesUsuario(
     usuario: Usuario,
     modifier: Modifier = Modifier
 ) {
-    SeccionTitulo("Datos de contacto")
+    SeccionTitulo(stringResource(R.string.datos_de_contacto))
 
     Card(
         modifier = modifier
@@ -100,7 +100,7 @@ fun TarjetaDetallesPedido(
     pedido: Pedido?,
     modifier: Modifier = Modifier
 ) {
-    SeccionTitulo("Datos del pedido")
+    SeccionTitulo(stringResource(R.string.datos_del_pedido))
 
     // Tarjeta ID pedido y fecha
     Card(
@@ -129,7 +129,7 @@ fun TarjetaDetallesPedido(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Text(text = stringResource(R.string.realizado_el_d_a, pedido.fecha))
+                    Text(text = stringResource(R.string.realizado_el_dia, pedido.fecha))
                 }
             }
         }
@@ -164,20 +164,22 @@ fun TarjetaDetallesPedido(
                     }
                     is PizzaMargarita -> {
                         if (pedido.pizza.piña) {
-                            InfoPedido(R.drawable.pi_a, "Con piña")
+                            InfoPedido(R.drawable.pi_a, stringResource(R.string.con_pina))
                         } else {
-                            InfoPedido(R.drawable.cruz, "Sin piña")
+                            InfoPedido(R.drawable.cruz, stringResource(R.string.sin_pina))
                         }
 
                         if (pedido.pizza.vegana) {
-                            InfoPedido(R.drawable.planta, "Opción vegana")
+                            InfoPedido(R.drawable.planta, stringResource(R.string.opcion_vegana_))
                         }
                     }
                     is PizzaRomana -> {
                         if (pedido.pizza.champiñones) {
-                            InfoPedido(R.drawable.champi_on, "Con champiñones")
+                            InfoPedido(R.drawable.champi_on,
+                                stringResource(R.string.con_champinones)
+                            )
                         } else {
-                            InfoPedido(R.drawable.cruz, "Sin champiñones")
+                            InfoPedido(R.drawable.cruz, stringResource(R.string.sin_champinones))
                         }
                     }
                     else -> {}
@@ -186,7 +188,7 @@ fun TarjetaDetallesPedido(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 if (pedido?.bebida?.tipoBebida == tipoBebida.SIN_BEBIDA) {
-                    InfoPedido(R.drawable.cruz, "Sin bebida")
+                    InfoPedido(R.drawable.cruz, stringResource(R.string.sin_bebida_))
                 } else {
                     InfoPedido(R.drawable.bebida, "${pedido?.cantidadBebida} x ${pedido?.bebida?.tipoBebida}")
                 }
@@ -213,7 +215,7 @@ fun TarjetaDetallesPago(
     pedido: Pedido?,
     modifier: Modifier = Modifier
 ) {
-    SeccionTitulo(stringResource(R.string.m_todo_de_pago))
+    SeccionTitulo(stringResource(R.string.metodo_de_pago))
 
     Card(
         modifier = modifier

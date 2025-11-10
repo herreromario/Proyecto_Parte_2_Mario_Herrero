@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Proyecto Parte 2 - Mario Herrero</string>
-
-    <!-- Nombre de las pantallas -->
     <string name="pantalla_inicial">Pantalla inicial</string>
     <string name="pantalla_listar_pedidos">Pantalla listar pedidos</string>
-
     <string name="atras">atrás</string>
     <string name="sin_bebida">SIN BEBIDA</string>
     <string name="pantalla_detalles_pedido">Pantalla detalles pedido</string>
@@ -14,15 +11,15 @@
     <string name="pantalla_formulario_pago">Pantalla formulario de pago</string>
     <string name="pantalla_resumen_de_pedido">Pantalla resumen de pedido</string>
     <string name="pantalla_pedido_realizado">Pantalla pedido realizado</string>
-    <string name="qu_prefieres_hacer">¿Qué prefieres hacer?</string>
+    <string name="que_prefieres_hacer">¿Qué prefieres hacer?</string>
     <string name="realizar_pedido">Realizar pedido</string>
     <string name="listar_pedidos">Listar pedidos</string>
     <string name="lista_de_pedidos">Lista de pedidos</string>
     <string name="detalles">Detalles</string>
     <string name="detalles_del_pedido">Detalles del pedido</string>
     <string name="pedido">Pedido #%1$d</string>
-    <string name="realizado_el_d_a">Realizado el día %1$s</string>
-    <string name="m_todo_de_pago">Método de pago</string>
+    <string name="realizado_el_dia">Realizado el día %1$s</string>
+    <string name="metodo_de_pago">Método de pago</string>
     <string name="pagado_con_tarjeta">Pagado con tarjeta %1$s</string>
     <string name="tarjeta_acabada_en">Tarjeta acabada en %1$s</string>
     <string name="realizar_un_pedido">Realizar un pedido</string>
@@ -32,8 +29,44 @@
     <string name="precio_2f">Precio: %.2f €</string>
     <string name="proceder_con_el_pago">Proceder con el pago</string>
     <string name="selecciona_una_pizza">Selecciona una pizza</string>
-    <string name="selecciona_un_tama_o">Selecciona un tamaño</string>
+    <string name="selecciona_un_tamano">Selecciona un tamaño</string>
     <string name="cantidad_de_pizzas">Cantidad de pizzas</string>
     <string name="selecciona_una_bebida">Selecciona una bebida</string>
     <string name="cantidad_de_bebidas">Cantidad de bebidas</string>
+    <string name="personalizar_pizza">Personalizar Pizza %1$s</string>
+    <string name="formulario_de_pago">Formulario de pago</string>
+    <string name="numero_de_tarjeta">Numero de tarjeta</string>
+    <string name="numero_de_la_tarjeta">Numero de la tarjeta</string>
+    <string name="fecha">Fecha</string>
+    <string name="fecha_de_caducidad_cvc">Fecha de caducidad / CVC</string>
+    <string name="pagar_y_finalizar">Pagar y finalizar</string>
+    <string name="selecciona_un_tipo_de_tarjeta">Selecciona un tipo de tarjeta</string>
+    <string name="resumen_del_pedido">Resumen del pedido</string>
+    <string name="finalizar_pedido">Finalizar pedido</string>
+    <string name="justificante_del_pedido">Justificante del pedido #%1$s</string>
+    <string name="gracias_por_tu_pedido">¡Gracias por tu pedido!</string>
+    <string name="aqu_tienes_el_justificante_de_tu_compra">Aquí tienes el justificante de tu compra:</string>
+    <string name="pedido_id">Pedido #%1$s</string>
+    <string name="pizza_x">Pizza: %1$d x %2$s</string>
+    <string name="bebida_x">Bebida: %1$d x %2$s</string>
+    <string name="precio_total">Precio total: %1$s €</string>
+    <string name="m_todo_de_pago">Método de pago: %1$s</string>
+    <string name="tarjeta_terminada_en">Tarjeta terminada en %1$s</string>
+    <string name="disfruta_tu_pizza">¡Disfruta tu pizza!</string>
+    <string name="enhorabuena">¡Enhorabuena!</string>
+    <string name="tu_pedido_ha_sido_confirmado">Tu pedido #%1$s ha sido confirmado</string>
+    <string name="enviar_justificante_por_correo">Enviar justificante por correo</string>
+    <string name="volver_al_inicio">Volver al inicio</string>
+    <string name="pina">piña</string>
+    <string name="opcion_vegana">opción vegana</string>
+    <string name="champinones">champiñones</string>
+    <string name="volver_atras">Volver atrás</string>
+    <string name="datos_de_contacto">Datos de contacto</string>
+    <string name="datos_del_pedido">Datos del pedido</string>
+    <string name="con_pina">Con piña</string>
+    <string name="sin_pina">Sin piña</string>
+    <string name="opcion_vegana_">Opción vegana</string>
+    <string name="con_champinones">Con champiñones</string>
+    <string name="sin_champinones">Sin champiñones</string>
+    <string name="sin_bebida_">Sin bebida</string>
 </resources>

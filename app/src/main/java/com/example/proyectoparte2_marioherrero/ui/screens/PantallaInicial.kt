@@ -141,7 +141,7 @@ fun PreguntarOpcion(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.qu_prefieres_hacer),
+            text = stringResource(R.string.que_prefieres_hacer),
             style = MaterialTheme.typography.headlineLarge
         )
         BotonRealizarPedido(onClick = {onBotonRealizarPedidoPulsado()})

@@ -16,7 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.proyectoparte2_marioherrero.R
 import com.example.proyectoparte2_marioherrero.modelo.Pedido
 import com.example.proyectoparte2_marioherrero.modelo.Usuario
 import com.example.proyectoparte2_marioherrero.modelo.uistate.PizzaTimeUIState
@@ -36,20 +38,20 @@ fun PantallaPedidoRealizado(
 
     fun enviarJustificantePorCorreo() {
         val destinatario = usuario.correo // o el correo del usuario
-        val asunto = "Justificante del pedido #${pedido?.id ?: "-"}"
+        val asunto = context.getString(R.string.justificante_del_pedido, pedido?.id ?: "-")
         val mensaje = buildString {
-            appendLine("¡Gracias por tu pedido!")
-            appendLine("Aquí tienes el justificante de tu compra:")
+            appendLine(context.getString(R.string.gracias_por_tu_pedido))
+            appendLine(context.getString(R.string.aqu_tienes_el_justificante_de_tu_compra))
             appendLine("")
-            appendLine("Pedido #${pedido?.id ?: "-"}")
-            appendLine("Pizza: ${pedido?.cantidadPizza} x ${pedido?.pizza?.nombre}")
-            appendLine("Bebida: ${pedido?.cantidadBebida} x ${pedido?.bebida?.tipoBebida}")
-            appendLine("Precio total: ${pedido?.precio} €")
+            appendLine(context.getString(R.string.pedido_id, pedido?.id ?: "-"))
+            appendLine(context.getString(R.string.pizza_x, pedido?.cantidadPizza, pedido?.pizza?.nombre))
+            appendLine(context.getString(R.string.bebida_x, pedido?.cantidadBebida, pedido?.bebida?.tipoBebida))
+            appendLine(context.getString(R.string.precio_total, pedido?.precio))
             appendLine("")
-            appendLine("Método de pago: ${pedido?.pago?.tipoTarjeta}")
-            appendLine("Tarjeta terminada en ${pedido?.pago?.numeroTarjeta?.takeLast(4)}")
+            appendLine(context.getString(R.string.m_todo_de_pago, pedido?.pago?.tipoTarjeta))
+            appendLine(context.getString(R.string.tarjeta_terminada_en, pedido?.pago?.numeroTarjeta?.takeLast(4)))
             appendLine("")
-            appendLine("¡Disfruta tu pizza!")
+            appendLine(context.getString(R.string.disfruta_tu_pizza))
         }
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
@@ -70,11 +72,11 @@ fun PantallaPedidoRealizado(
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         Text(
-            text = "¡Enhorabuena!",
+            text = stringResource(R.string.enhorabuena),
             style = MaterialTheme.typography.headlineLarge
         )
         Text(
-            text = "Tu pedido #${pedido?.id ?: "-"} ha sido confirmado",
+            text = stringResource(R.string.tu_pedido_ha_sido_confirmado, pedido?.id ?: "-"),
             style = MaterialTheme.typography.titleLarge
         )
 
@@ -91,7 +93,7 @@ fun PantallaPedidoRealizado(
                 .size(height = 60.dp, width = 250.dp)
         ) {
             Text(
-                text = "Enviar justificante por correo",
+                text = stringResource(R.string.enviar_justificante_por_correo),
                 style = MaterialTheme.typography.titleMedium
             )
         }
@@ -106,7 +108,7 @@ fun PantallaPedidoRealizado(
                 .size(height = 60.dp, width = 250.dp)
         ) {
             Text(
-                text = "Volver al inicio",
+                text = stringResource(R.string.volver_al_inicio),
                 style = MaterialTheme.typography.titleMedium
             )
         }
